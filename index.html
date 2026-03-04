@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,170 +9,517 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="えいごすごろく">
     <link rel="apple-touch-icon" href="chikawa.png">
-    
+
     <title>ちいかわのえいごすごろく</title>
     <style>
         /* 📱 基本デザイン */
         body {
             font-family: 'Hiragino Maru Gothic ProN', 'Rounded M+ 1c', sans-serif;
             background-color: #FFF0F5;
-            margin: 0; padding: 0; text-align: center; color: #333;
-            overscroll-behavior-y: none; user-select: none; -webkit-user-select: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+            overscroll-behavior-y: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
+
         .container {
-            max-width: 500px; margin: 0 auto; padding: 10px 15px 20px;
-            box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column;
-            padding-top: env(safe-area-inset-top, 20px); padding-bottom: env(safe-area-inset-bottom, 20px);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px 15px 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
-        .hidden { display: none !important; }
-        
-        h1 { color: #FF1493; font-size: 26px; margin: 10px 0; text-shadow: 2px 2px 0px #FFF; line-height: 1.3;}
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            color: #FF1493;
+            font-size: 26px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0px #FFF;
+            line-height: 1.3;
+        }
 
         /* 🌟 あつめたなかまエリア */
         .friends-container {
-            background: #FFF; border-radius: 15px; padding: 25px 10px 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 15px;
-            display: flex; justify-content: space-around; align-items: flex-end;
-            border: 4px solid #FFD700; position: relative; min-height: 70px;
+            background: #FFF;
+            border-radius: 15px;
+            padding: 25px 10px 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            border: 4px solid #FFD700;
+            position: relative;
+            min-height: 70px;
         }
+
         .friends-title {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: #FFD700; color: #333; font-size: 14px; font-weight: bold;
-            padding: 4px 15px; border-radius: 20px; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFD700;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .friend-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; width: 18%; }
-        
+
+        .friend-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+        }
+
         /* 🖼 キャラクター画像共通クラス (見切れないように角丸四角＋contain) */
         .char-image-box {
-            background-size: contain; background-position: center; background-repeat: no-repeat;
-            background-color: #fff; border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15); border: 3px solid #FF1493; transition: all 0.5s ease;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border: 3px solid #FF1493;
+            transition: all 0.5s ease;
         }
+
         /* 各エリアのサイズ設定 */
-        .friend-box { width: 50px; height: 50px; }
-        .cell-icon { width: 80%; height: 80%; border-radius: 8px; border-width: 2px; margin-top: 5px; box-shadow: none; }
-        .big-icon { width: 200px; height: 200px; border-radius: 25px; border-width: 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .goal-icon { width: 70px; height: 70px; border-radius: 15px; border-color: #FFD700; animation: bounce 1.5s infinite; }
-        .goal-icon:nth-child(even) { animation-delay: 0.2s; }
+        .friend-box {
+            width: 50px;
+            height: 50px;
+        }
+
+        .cell-icon {
+            width: 80%;
+            height: 80%;
+            border-radius: 8px;
+            border-width: 2px;
+            margin-top: 5px;
+            box-shadow: none;
+        }
+
+        .big-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 25px;
+            border-width: 6px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .goal-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            border-color: #FFD700;
+            animation: bounce 1.5s infinite;
+        }
+
+        .goal-icon:nth-child(even) {
+            animation-delay: 0.2s;
+        }
 
         /* 画像ファイルの割り当て */
-        .img-chiikawa { background-image: url('chikawa.png'); }
-        .img-usagi { background-image: url('usagi.png'); }
-        .img-hachiware { background-image: url('hachiware.png'); }
-        .img-kurimanju { background-image: url('kurimanju.jpg'); }
-        .img-momonga { background-image: url('momonga.png'); }
-        
-        .locked { filter: grayscale(100%) brightness(0.6); opacity: 0.3; border-color: #ccc; }
+        .img-chiikawa {
+            background-image: url('chikawa.png');
+        }
+
+        .img-usagi {
+            background-image: url('usagi.png');
+        }
+
+        .img-hachiware {
+            background-image: url('hachiware.png');
+        }
+
+        .img-kurimanju {
+            background-image: url('kurimanju.jpg');
+        }
+
+        .img-momonga {
+            background-image: url('momonga.png');
+        }
+
+        .locked {
+            filter: grayscale(100%) brightness(0.6);
+            opacity: 0.3;
+            border-color: #ccc;
+        }
 
         /* 💬 応援吹き出し (上に出るように修正) */
         .balloon {
-            position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%);
-            background: #FFF; border: 2px solid #FF1493; border-radius: 10px;
-            padding: 5px 10px; font-size: 12px; font-weight: bold; color: #333;
-            white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 10; pointer-events: none;
+            position: absolute;
+            bottom: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFF;
+            border: 2px solid #FF1493;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 10;
+            pointer-events: none;
         }
+
         .balloon::after {
-            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-            border-width: 8px 7px 0 7px; border-style: solid; border-color: #FF1493 transparent transparent transparent;
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 7px 0 7px;
+            border-style: solid;
+            border-color: #FF1493 transparent transparent transparent;
         }
+
         .balloon::before {
-            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-            border-width: 6px 5px 0 5px; border-style: solid; border-color: #FFF transparent transparent transparent; z-index: 1;
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 5px 0 5px;
+            border-style: solid;
+            border-color: #FFF transparent transparent transparent;
+            z-index: 1;
         }
-        .balloon.show { opacity: 1; transform: translate(-50%, -5px); animation: floatBalloon 2s ease-in-out infinite; }
-        @keyframes floatBalloon { 0%, 100% { transform: translate(-50%, -5px); } 50% { transform: translate(-50%, -10px); } }
+
+        .balloon.show {
+            opacity: 1;
+            transform: translate(-50%, -5px);
+            animation: floatBalloon 2s ease-in-out infinite;
+        }
+
+        @keyframes floatBalloon {
+
+            0%,
+            100% {
+                transform: translate(-50%, -5px);
+            }
+
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
 
         /* 🎲 すごろくボード */
         .sugoroku-container {
-            background: #FFF; border: 4px solid #FF69B4; border-radius: 15px;
-            padding: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #FFF;
+            border: 4px solid #FF69B4;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .sugoroku-grid {
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin-top: 10px;
         }
+
         .cell {
-            background: #F8F9F9; border: 2px solid #BDC3C7; border-radius: 8px;
-            aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: relative; transition: all 0.3s;
+            background: #F8F9F9;
+            border: 2px solid #BDC3C7;
+            border-radius: 8px;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s;
         }
-        .cell-num { position: absolute; top: 2px; left: 4px; font-size: 10px; font-weight: bold; color: #7F8C8D; }
+
+        .cell-num {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #7F8C8D;
+        }
+
         .cell.active {
-            border-color: #FF1493; background: #FFE4E1; box-shadow: 0 0 10px #FF69B4;
-            transform: scale(1.1); z-index: 2;
+            border-color: #FF1493;
+            background: #FFE4E1;
+            box-shadow: 0 0 10px #FF69B4;
+            transform: scale(1.1);
+            z-index: 2;
         }
+
         .cell.active::after {
-            content: '📍'; position: absolute; bottom: -5px; right: -5px; font-size: 20px;
+            content: '📍';
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            font-size: 20px;
             animation: pinBounce 1s infinite;
         }
-        .cell.goal { background: #FFD700; border-color: #F39C12; }
-        @keyframes pinBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        .cell.goal {
+            background: #FFD700;
+            border-color: #F39C12;
+        }
+
+        @keyframes pinBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
 
         /* 🔘 クイズ画面のUI */
         .question-text {
-            font-size: 40px; font-weight: bold; margin: 10px 0 20px; color: #2C3E50;
-            background: white; padding: 20px 10px; border-radius: 15px; border: 4px dashed #FFB6C1;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 10px 0 20px;
+            color: #2C3E50;
+            background: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            border: 4px dashed #FFB6C1;
         }
+
         .choice-row {
-            display: flex; gap: 10px; margin-bottom: 12px; align-items: stretch;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: stretch;
         }
+
         .listen-btn {
-            flex: 0 0 70px; background-color: #FFD700; color: #333; border: none;
-            border-radius: 12px; font-size: 24px; font-weight: bold; box-shadow: 0 5px #DAA520;
-            cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            flex: 0 0 70px;
+            background-color: #FFD700;
+            color: #333;
+            border: none;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px #DAA520;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             -webkit-tap-highlight-color: transparent;
         }
-        .listen-btn span { font-size: 10px; margin-top: 2px; }
-        .listen-btn:active { transform: translateY(5px); box-shadow: 0 0 #DAA520; }
-        
-        .choice-btn {
-            flex: 1; background-color: #FFF; color: #333; border: 3px solid #87CEEB;
-            box-shadow: 0 5px #87CEEB; font-size: 26px; font-weight: bold; padding: 15px;
-            border-radius: 12px; transition: all 0.2s ease; -webkit-tap-highlight-color: transparent;
+
+        .listen-btn span {
+            font-size: 10px;
+            margin-top: 2px;
         }
-        .choice-btn:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 0 #87CEEB; }
-        .choice-btn:disabled { opacity: 0.9; cursor: not-allowed; transform: none; box-shadow: 0 2px #ccc; border-color: #ccc; }
+
+        .listen-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 0 #DAA520;
+        }
+
+        .choice-btn {
+            flex: 1;
+            background-color: #FFF;
+            color: #333;
+            border: 3px solid #87CEEB;
+            box-shadow: 0 5px #87CEEB;
+            font-size: 26px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .choice-btn:active:not(:disabled) {
+            transform: translateY(5px);
+            box-shadow: 0 0 #87CEEB;
+        }
+
+        .choice-btn:disabled {
+            opacity: 0.9;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px #ccc;
+            border-color: #ccc;
+        }
 
         /* 汎用ボタン */
         .action-btn {
-            background-color: #FF69B4; color: white; border: none; padding: 15px 20px;
-            font-size: 22px; font-weight: bold; border-radius: 15px; box-shadow: 0 6px #FF1493;
-            cursor: pointer; width: 100%; margin-top: 10px; -webkit-tap-highlight-color: transparent;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 15px;
+            box-shadow: 0 6px #FF1493;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            -webkit-tap-highlight-color: transparent;
         }
-        .action-btn:active { transform: translateY(6px); box-shadow: 0 0 #FF1493; }
-        .btn-sub { background-color: #87CEFA; box-shadow: 0 6px #00BFFF; font-size: 18px;}
-        .btn-sub:active { box-shadow: 0 0 #00BFFF; }
-        
+
+        .action-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 #FF1493;
+        }
+
+        .btn-sub {
+            background-color: #87CEFA;
+            box-shadow: 0 6px #00BFFF;
+            font-size: 18px;
+        }
+
+        .btn-sub:active {
+            box-shadow: 0 0 #00BFFF;
+        }
+
         /* フィードバック */
-        .feedback-mark { font-size: 150px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 100; text-shadow: 0 0 20px rgba(255,255,255,0.9); }
-        .mark-show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .explanation-box { background: #FFF; border-radius: 15px; padding: 20px; border: 4px solid #FFD700; margin-top: 10px; }
+        .feedback-mark {
+            font-size: 150px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 100;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+
+        .mark-show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .explanation-box {
+            background: #FFF;
+            border-radius: 15px;
+            padding: 20px;
+            border: 4px solid #FFD700;
+            margin-top: 10px;
+        }
 
         /* 🌟 キャラゲット・ゴール演出 */
-        .overlay-full { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(255, 255, 255, 0.95); display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 300; padding: 20px; box-sizing: border-box;
+        .overlay-full {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .overlay-msg { font-size: 32px; font-weight: bold; color: #FF1493; margin-bottom: 20px; line-height: 1.4; text-shadow: 2px 2px 0 #FFF;}
-        
-        .goal-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        
-        .pop-anim { animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+
+        .overlay-msg {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FF1493;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-shadow: 2px 2px 0 #FFF;
+        }
+
+        .goal-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .pop-anim {
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            80% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
         /* 管理メニュー */
-        .admin-box { background: #f0f8ff; padding: 10px; border-radius: 8px; margin-top: 20px; text-align: left; }
-        .btn-small { padding: 8px; font-size: 14px; background-color: #95A5A6; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        .admin-box {
+            background: #f0f8ff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .btn-small {
+            padding: 8px;
+            font-size: 14px;
+            background-color: #95A5A6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <div class="container" id="app">
         <!-- 🎮 1. スタート・すごろく画面 -->
         <div id="start-screen">
             <h1>ちいかわの<br>えいごすごろく 🎲</h1>
-            
+
             <!-- 🌟 あつめたなかまエリア -->
             <div id="friends-area" class="friends-container">
                 <div class="friends-title">あつめた なかま</div>
@@ -179,18 +527,20 @@
             </div>
 
             <div class="sugoroku-container">
-                <p style="margin: 0 0 5px; font-weight: bold; color: #FF1493; font-size: 18px;">いま <span id="current-space-text" style="font-size:24px;">0</span> マスめ！</p>
+                <p style="margin: 0 0 5px; font-weight: bold; color: #FF1493; font-size: 18px;">いま <span
+                        id="current-space-text" style="font-size:24px;">0</span> マスめ！</p>
                 <p style="margin: 0; font-size: 12px; color: #555;">8もん せいかいで 1マスすすむよ！</p>
-                
+
                 <!-- すごろくのマス目（JSで自動生成） -->
                 <div class="sugoroku-grid" id="board-grid"></div>
             </div>
 
             <button class="action-btn" onclick="startGame()">クイズにちょうせん！</button>
-            
+
             <!-- データ管理（折りたたみ） -->
             <details class="admin-box">
-                <summary style="font-size: 12px; color: #666; cursor: pointer; font-weight:bold;">⚙️ おとなのひとへ（データリセット）</summary>
+                <summary style="font-size: 12px; color: #666; cursor: pointer; font-weight:bold;">⚙️ おとなのひとへ（データリセット）
+                </summary>
                 <div style="margin-top:10px; display:flex; gap:10px;">
                     <button class="btn-small" onclick="resetData()">最初からやり直す</button>
                 </div>
@@ -201,18 +551,20 @@
         <div id="quiz-screen" class="hidden" style="flex: 1;">
             <p id="question-counter" style="font-weight: bold; color: #666; margin-bottom:5px;">もんだい 1 / 10</p>
             <p style="margin:0; font-size:14px; color:#FF1493; font-weight:bold;">えいごで なんていう？</p>
-            
+
             <!-- 日本語表示 -->
             <div id="question-text" class="question-text">りんご</div>
-            
+
             <!-- 選択肢コンテナ -->
             <div id="choices-container"></div>
-            
+
             <!-- 答え合わせ表示 -->
             <div id="explanation-area" class="hidden explanation-box">
                 <p style="margin:0; font-weight:bold; color:#777;">せいかいは…</p>
                 <h3 id="exp-word" style="font-size: 36px; margin: 5px 0;">apple</h3>
-                <button class="action-btn" style="margin-top: 15px; background-color: #32CD32; box-shadow: 0 6px #228B22;" onclick="nextQuestion()">つぎへ！</button>
+                <button class="action-btn"
+                    style="margin-top: 15px; background-color: #32CD32; box-shadow: 0 6px #228B22;"
+                    onclick="nextQuestion()">つぎへ！</button>
             </div>
         </div>
 
@@ -220,14 +572,16 @@
         <div id="result-screen" class="hidden">
             <h1 style="color: #333; font-size:28px;">けっか はっぴょう</h1>
             <h2 id="final-score" style="font-size: 60px; color: #FF4500; margin: 10px 0;">10 / 10</h2>
-            
-            <div style="background: #FFF; border: 4px solid #FFD700; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
-                <p id="board-result-msg" style="font-weight: bold; font-size: 22px; margin: 0; line-height: 1.5; color: #FF1493;"></p>
+
+            <div
+                style="background: #FFF; border: 4px solid #FFD700; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                <p id="board-result-msg"
+                    style="font-weight: bold; font-size: 22px; margin: 0; line-height: 1.5; color: #FF1493;"></p>
             </div>
 
             <button class="action-btn" id="btn-return-home" onclick="checkUnlocksAndReturn()">すごろくを みる！</button>
         </div>
-        
+
         <div id="feedback-mark" class="feedback-mark"></div>
     </div>
 
@@ -236,7 +590,8 @@
         <h1 class="overlay-msg">やったー！<br>あたらしい なかま！</h1>
         <div id="unlock-icon" class="big-icon char-image-box pop-anim"></div>
         <h2 id="unlock-name" style="color: #333; font-size: 28px; margin-top:20px;">ちいかわ</h2>
-        <button class="action-btn" style="width: 80%; margin-top: 30px;" onclick="closeUnlockOverlay()">すごろくにもどる</button>
+        <button class="action-btn" style="width: 80%; margin-top: 30px;"
+            onclick="closeUnlockOverlay()">すごろくにもどる</button>
     </div>
 
     <!-- 👑 ゴール演出モーダル -->
@@ -339,7 +694,7 @@
             { space: 15, id: 'kurimanju', name: 'くりまんじゅう', quotes: ['ハーッ…', 'シュパッ', 'うまい！'] },
             { space: 18, id: 'momonga', name: 'モモンガ', quotes: ['みろ！', 'ほめろ！', 'フンッ'] }
         ];
-        
+
         const TOTAL_SPACES = 20;
 
         let gameStats = {
@@ -351,14 +706,14 @@
         function loadData() {
             const saved = localStorage.getItem('mioriSugorokuStats');
             if (saved) {
-                try { gameStats = JSON.parse(saved); } catch(e) {}
+                try { gameStats = JSON.parse(saved); } catch (e) { }
             }
             renderBoard();
             renderFriends();
         }
         function saveData() { localStorage.setItem('mioriSugorokuStats', JSON.stringify(gameStats)); }
-        function resetData() { 
-            if(confirm("ほんとうに さいしょから やりなおす？")) {
+        function resetData() {
+            if (confirm("ほんとうに さいしょから やりなおす？")) {
                 localStorage.removeItem('mioriSugorokuStats');
                 location.reload();
             }
@@ -375,9 +730,9 @@
                 cell.className = 'cell';
                 if (i === gameStats.space) cell.classList.add('active');
                 if (i === TOTAL_SPACES) cell.classList.add('goal');
-                
+
                 cell.innerHTML = `<div class="cell-num">${i}</div>`;
-                
+
                 // キャラが配置されるマスかチェック
                 const charData = charConfig.find(c => c.space === i);
                 if (charData) {
@@ -396,15 +751,15 @@
             const container = document.getElementById('friends-area');
             // タイトル以外をクリア
             container.innerHTML = '<div class="friends-title">あつめた なかま</div>';
-            
+
             charConfig.forEach(char => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'friend-wrapper';
-                
+
                 const isUnlocked = gameStats.unlocked[char.id];
                 // 未獲得の場合はモノクロ・半透明のシルエットにする
                 const iconClass = isUnlocked ? `img-${char.id}` : `img-${char.id} locked`;
-                
+
                 wrapper.innerHTML = `
                     <div class="char-image-box friend-box ${iconClass}"></div>
                     <div id="balloon-${char.id}" class="balloon"></div>
@@ -431,11 +786,11 @@
         function showCheerMessage() {
             // いったん全ての吹き出しを消す
             document.querySelectorAll('.balloon').forEach(b => b.classList.remove('show'));
-            
+
             // 解放済みのキャラを探す
             const unlockedChars = charConfig.filter(c => gameStats.unlocked[c.id]);
             if (unlockedChars.length === 0) return;
-            
+
             // ランダムに1人選んで喋らせる
             const randomChar = unlockedChars[Math.floor(Math.random() * unlockedChars.length)];
             const balloon = document.getElementById(`balloon-${randomChar.id}`);
@@ -454,25 +809,36 @@
 
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance('')); // iOSロック解除
+            // iOS/iPadOS: AudioContextがsuspendedの場合があるので明示的にresume
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            // iOS/iPadOS: 空の発話でSpeechSynthesisのロックを解除
+            speechSynthesis.cancel();
+            const dummy = new SpeechSynthesisUtterance('');
+            dummy.volume = 0;
+            speechSynthesis.speak(dummy);
             loadVoices();
         }
 
         function loadVoices() {
             const v = speechSynthesis.getVoices();
-            englishVoice = v.find(x => x.lang === 'en-US' && x.name.includes('Samantha')) || 
-                           v.find(x => x.lang === 'en-US' && x.name.includes('Daniel')) ||
-                           v.find(x => x.lang === 'en-US') || v.find(x => x.lang.startsWith('en'));
+            englishVoice = v.find(x => x.lang === 'en-US' && x.name.includes('Samantha')) ||
+                v.find(x => x.lang === 'en-US' && x.name.includes('Daniel')) ||
+                v.find(x => x.lang === 'en-US') || v.find(x => x.lang.startsWith('en'));
         }
         window.speechSynthesis.onvoiceschanged = loadVoices;
 
         function playWordAudio(wordText) {
-            const u = new SpeechSynthesisUtterance(wordText);
-            u.lang = 'en-US';
-            if (!englishVoice) loadVoices();
-            if (englishVoice) u.voice = englishVoice;
-            u.rate = 0.85; u.pitch = 1.1;
-            speechSynthesis.speak(u);
+            // iOS/iPadOS: キューに残った発話をクリアしないと無音になるバグ対策
+            speechSynthesis.cancel();
+
+            setTimeout(() => {
+                const u = new SpeechSynthesisUtterance(wordText);
+                u.lang = 'en-US';
+                if (!englishVoice) loadVoices();
+                if (englishVoice) u.voice = englishVoice;
+                u.rate = 0.85; u.pitch = 1.1;
+                speechSynthesis.speak(u);
+            }, 100); // iOS向けに少し遅延させる
         }
 
         function playCorrectSound() {
@@ -518,7 +884,7 @@
             document.getElementById(id).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-        
+
         function showStartScreen() {
             renderFriends(); // 画面に戻るたびになかまを描画し直す
             showScreen('start-screen');
@@ -528,7 +894,7 @@
         function startGame() {
             initAudio();
             stopCheering(); // クイズ中は応援ストップ
-            
+
             score = 0; currentQuestionIndex = 0; hitGoal = false; newlyUnlockedChar = null;
             // ランダムに10問選ぶ
             currentQuizSet = shuffleArray(wordsData).slice(0, totalQuestions);
@@ -540,23 +906,23 @@
             const q = currentQuizSet[currentQuestionIndex];
             document.getElementById('question-counter').innerText = `もんだい ${currentQuestionIndex + 1} / ${totalQuestions}`;
             document.getElementById('question-text').innerText = q.meaning; // 日本語を表示
-            
+
             const container = document.getElementById('choices-container');
             container.innerHTML = '';
-            
+
             // 他の単語（英単語）からランダムに3つダミーを作成
             const dummies = [];
-            while(dummies.length < 3) {
+            while (dummies.length < 3) {
                 const r = wordsData[Math.floor(Math.random() * wordsData.length)].word;
-                if(r !== q.word && !dummies.includes(r)) dummies.push(r);
+                if (r !== q.word && !dummies.includes(r)) dummies.push(r);
             }
             const choices = shuffleArray([q.word, ...dummies]);
-            
+
             // 選択肢の描画（「おとをきく」ボタン ＋ 英語ボタン）
             choices.forEach(text => {
                 const row = document.createElement('div');
                 row.className = 'choice-row';
-                
+
                 // おとをきくボタン
                 const listenBtn = document.createElement('button');
                 listenBtn.className = 'listen-btn';
@@ -587,17 +953,17 @@
             mark.innerText = isCorrect ? '⭕️' : '❌';
             mark.style.color = isCorrect ? '#FF4500' : '#1E90FF';
             mark.className = 'feedback-mark mark-show';
-            
+
             if (isCorrect) { playCorrectSound(); score++; btn.style.backgroundColor = '#FFD700'; }
-            else { 
-                playIncorrectSound(); btn.style.backgroundColor = '#E0E0E0'; 
-                document.querySelectorAll('.choice-btn').forEach(b => { 
-                    if(b.innerText === correct) { b.style.backgroundColor = '#FFD700'; b.style.border = '4px solid #FF4500'; } 
-                }); 
+            else {
+                playIncorrectSound(); btn.style.backgroundColor = '#E0E0E0';
+                document.querySelectorAll('.choice-btn').forEach(b => {
+                    if (b.innerText === correct) { b.style.backgroundColor = '#FFD700'; b.style.border = '4px solid #FF4500'; }
+                });
             }
-            
+
             setTimeout(() => mark.className = 'feedback-mark', 800);
-            
+
             // 答えあわせに正解の英単語を表示し、自動で発音する
             document.getElementById('exp-word').innerText = correct;
             document.getElementById('explanation-area').classList.remove('hidden');
@@ -614,18 +980,18 @@
         function showResult() {
             const isSuccess = score >= 8; // 8問以上で1マス進む
             let moved = false;
-            
+
             if (isSuccess && gameStats.space < TOTAL_SPACES) {
                 gameStats.space++;
                 moved = true;
-                
+
                 // キャラ解放チェック
                 const unlockData = charConfig.find(c => c.space === gameStats.space);
                 if (unlockData && !gameStats.unlocked[unlockData.id]) {
                     gameStats.unlocked[unlockData.id] = true;
                     newlyUnlockedChar = unlockData;
                 }
-                
+
                 // ゴールチェック
                 if (gameStats.space === TOTAL_SPACES) {
                     hitGoal = true;
@@ -636,7 +1002,7 @@
 
             showScreen('result-screen');
             document.getElementById('final-score').innerText = `${score} もん せいかい！`;
-            
+
             const msgEl = document.getElementById('board-result-msg');
             if (moved) {
                 msgEl.innerText = "やったね！！✨\n１マス すすんだよ！";
@@ -679,10 +1045,11 @@
         }
 
         // --- 初期化 ---
-        window.onload = () => { 
-            loadData(); 
+        window.onload = () => {
+            loadData();
             startCheering();
         };
     </script>
 </body>
+
 </html>
