@@ -288,92 +288,34 @@
         /* =========================================================
            4. 音声と効果音 (Web API)
            ========================================================= */
-        let englishVoice = null;
         let audioCtx = null;
-        let speechUnlocked = false;
-        let ttsAudio = null; // Audio要素の再利用
-
-        // PWAスタンドアロンモード検出（ホーム画面から起動した場合）
-        function isStandaloneMode() {
-            return window.navigator.standalone === true ||
-                window.matchMedia('(display-mode: standalone)').matches;
-        }
 
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
-
-            // スタンドアロンモードではspeechSynthesisが使えないのでスキップ
-            if (!isStandaloneMode() && !speechUnlocked) {
-                const dummy = new SpeechSynthesisUtterance('.');
-                dummy.lang = 'en-US';
-                dummy.volume = 0.01;
-                dummy.rate = 10;
-                speechSynthesis.speak(dummy);
-                speechUnlocked = true;
-                loadVoices();
-            }
         }
 
-        function loadVoices() {
-            const v = speechSynthesis.getVoices();
-            if (v.length === 0) return;
-            englishVoice = v.find(x => x.lang === 'en-US' && x.name.includes('Samantha')) ||
-                v.find(x => x.lang === 'en-US' && x.name.includes('Daniel')) ||
-                v.find(x => x.lang === 'en-US') || v.find(x => x.lang.startsWith('en'));
-        }
-
-        if (typeof speechSynthesis !== 'undefined') {
-            speechSynthesis.onvoiceschanged = loadVoices;
-            setTimeout(loadVoices, 500);
-            setTimeout(loadVoices, 2000);
-        }
-
-        // --- 音声再生（2モード対応） ---
-        function playWordAudio(wordText) {
+        // --- 音声再生（Web Audio API + ローカルmp3） ---
+        async function playWordAudio(wordText) {
             if (!wordText) return;
+            initAudio();
 
-            if (isStandaloneMode()) {
-                // PWAモード: speechSynthesisが使えないのでAudio要素で代替
-                playWordViaAudio(wordText);
-            } else {
-                // Safariブラウザモード: speechSynthesisを使用
-                playWordViaSpeech(wordText);
-            }
-        }
+            // 安全なファイル名に変換（Pythonスクリプトの実装に合わせる）
+            const safeWord = wordText.replace(/ /g, '_').toLowerCase();
+            const url = 'audio/' + safeWord + '.mp3';
 
-        // 方法1: speechSynthesis（Safariブラウザ用）
-        function playWordViaSpeech(wordText) {
-            if (!englishVoice) loadVoices();
-
-            const u = new SpeechSynthesisUtterance(wordText);
-            u.lang = 'en-US';
-            if (englishVoice) u.voice = englishVoice;
-            u.volume = 1;
-            u.rate = 0.85;
-            u.pitch = 1.1;
-
-            if (speechSynthesis.speaking) speechSynthesis.cancel();
-            if (speechSynthesis.paused) speechSynthesis.resume();
-            speechSynthesis.speak(u);
-        }
-
-        // 方法2: Google翻訳TTS + Audio要素（PWAスタンドアロン用）
-        function playWordViaAudio(wordText) {
             try {
-                // 前の再生を止める
-                if (ttsAudio) {
-                    ttsAudio.pause();
-                    ttsAudio.currentTime = 0;
-                }
-                const url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=' + encodeURIComponent(wordText);
-                ttsAudio = new Audio(url);
-                ttsAudio.volume = 1;
-                ttsAudio.play().catch(function (e) {
-                    console.log('TTS audio fallback failed:', e);
-                });
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network status: ' + response.status);
+                const arrayBuffer = await response.arrayBuffer();
+                const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+                const source = audioCtx.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioCtx.destination);
+                source.start();
             } catch (e) {
-                console.log('TTS error:', e);
+                console.error('Error playing local mp3:', e);
             }
         }
 
