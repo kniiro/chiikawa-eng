@@ -11,507 +11,7 @@
     <link rel="apple-touch-icon" href="chikawa.png">
 
     <title>ちいかわのえいごすごろく</title>
-    <style>
-        /* 📱 基本デザイン */
-        body {
-            font-family: 'Hiragino Maru Gothic ProN', 'Rounded M+ 1c', sans-serif;
-            background-color: #FFF0F5;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            color: #333;
-            overscroll-behavior-y: none;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 10px 15px 20px;
-            box-sizing: border-box;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding-top: env(safe-area-inset-top, 20px);
-            padding-bottom: env(safe-area-inset-bottom, 20px);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        h1 {
-            color: #FF1493;
-            font-size: 26px;
-            margin: 10px 0;
-            text-shadow: 2px 2px 0px #FFF;
-            line-height: 1.3;
-        }
-
-        /* 🌟 あつめたなかまエリア */
-        .friends-container {
-            background: #FFF;
-            border-radius: 15px;
-            padding: 25px 10px 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            border: 4px solid #FFD700;
-            position: relative;
-            min-height: 70px;
-        }
-
-        .friends-title {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #FFD700;
-            color: #333;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 4px 15px;
-            border-radius: 20px;
-            white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .friend-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 18%;
-        }
-
-        /* 🖼 キャラクター画像共通クラス (見切れないように角丸四角＋contain) */
-        .char-image-box {
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            border: 3px solid #FF1493;
-            transition: all 0.5s ease;
-        }
-
-        /* 各エリアのサイズ設定 */
-        .friend-box {
-            width: 50px;
-            height: 50px;
-        }
-
-        .cell-icon {
-            width: 80%;
-            height: 80%;
-            border-radius: 8px;
-            border-width: 2px;
-            margin-top: 5px;
-            box-shadow: none;
-        }
-
-        .big-icon {
-            width: 200px;
-            height: 200px;
-            border-radius: 25px;
-            border-width: 6px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .goal-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
-            border-color: #FFD700;
-            animation: bounce 1.5s infinite;
-        }
-
-        .goal-icon:nth-child(even) {
-            animation-delay: 0.2s;
-        }
-
-        /* 画像ファイルの割り当て */
-        .img-chiikawa {
-            background-image: url('chikawa.png');
-        }
-
-        .img-usagi {
-            background-image: url('usagi.png');
-        }
-
-        .img-hachiware {
-            background-image: url('hachiware.png');
-        }
-
-        .img-kurimanju {
-            background-image: url('kurimanju.jpg');
-        }
-
-        .img-momonga {
-            background-image: url('momonga.png');
-        }
-
-        .locked {
-            filter: grayscale(100%) brightness(0.6);
-            opacity: 0.3;
-            border-color: #ccc;
-        }
-
-        /* 💬 応援吹き出し (上に出るように修正) */
-        .balloon {
-            position: absolute;
-            bottom: 65px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #FFF;
-            border: 2px solid #FF1493;
-            border-radius: 10px;
-            padding: 5px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            color: #333;
-            white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .balloon::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 8px 7px 0 7px;
-            border-style: solid;
-            border-color: #FF1493 transparent transparent transparent;
-        }
-
-        .balloon::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px 5px 0 5px;
-            border-style: solid;
-            border-color: #FFF transparent transparent transparent;
-            z-index: 1;
-        }
-
-        .balloon.show {
-            opacity: 1;
-            transform: translate(-50%, -5px);
-            animation: floatBalloon 2s ease-in-out infinite;
-        }
-
-        @keyframes floatBalloon {
-
-            0%,
-            100% {
-                transform: translate(-50%, -5px);
-            }
-
-            50% {
-                transform: translate(-50%, -10px);
-            }
-        }
-
-        /* 🎲 すごろくボード */
-        .sugoroku-container {
-            background: #FFF;
-            border: 4px solid #FF69B4;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .sugoroku-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .cell {
-            background: #F8F9F9;
-            border: 2px solid #BDC3C7;
-            border-radius: 8px;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .cell-num {
-            position: absolute;
-            top: 2px;
-            left: 4px;
-            font-size: 10px;
-            font-weight: bold;
-            color: #7F8C8D;
-        }
-
-        .cell.active {
-            border-color: #FF1493;
-            background: #FFE4E1;
-            box-shadow: 0 0 10px #FF69B4;
-            transform: scale(1.1);
-            z-index: 2;
-        }
-
-        .cell.active::after {
-            content: '📍';
-            position: absolute;
-            bottom: -5px;
-            right: -5px;
-            font-size: 20px;
-            animation: pinBounce 1s infinite;
-        }
-
-        .cell.goal {
-            background: #FFD700;
-            border-color: #F39C12;
-        }
-
-        @keyframes pinBounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* 🔘 クイズ画面のUI */
-        .question-text {
-            font-size: 40px;
-            font-weight: bold;
-            margin: 10px 0 20px;
-            color: #2C3E50;
-            background: white;
-            padding: 20px 10px;
-            border-radius: 15px;
-            border: 4px dashed #FFB6C1;
-        }
-
-        .choice-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-            align-items: stretch;
-        }
-
-        .listen-btn {
-            flex: 0 0 70px;
-            background-color: #FFD700;
-            color: #333;
-            border: none;
-            border-radius: 12px;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 5px #DAA520;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .listen-btn span {
-            font-size: 10px;
-            margin-top: 2px;
-        }
-
-        .listen-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 0 #DAA520;
-        }
-
-        .choice-btn {
-            flex: 1;
-            background-color: #FFF;
-            color: #333;
-            border: 3px solid #87CEEB;
-            box-shadow: 0 5px #87CEEB;
-            font-size: 26px;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .choice-btn:active:not(:disabled) {
-            transform: translateY(5px);
-            box-shadow: 0 0 #87CEEB;
-        }
-
-        .choice-btn:disabled {
-            opacity: 0.9;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 2px #ccc;
-            border-color: #ccc;
-        }
-
-        /* 汎用ボタン */
-        .action-btn {
-            background-color: #FF69B4;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            font-size: 22px;
-            font-weight: bold;
-            border-radius: 15px;
-            box-shadow: 0 6px #FF1493;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .action-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0 #FF1493;
-        }
-
-        .btn-sub {
-            background-color: #87CEFA;
-            box-shadow: 0 6px #00BFFF;
-            font-size: 18px;
-        }
-
-        .btn-sub:active {
-            box-shadow: 0 0 #00BFFF;
-        }
-
-        /* フィードバック */
-        .feedback-mark {
-            font-size: 150px;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s;
-            z-index: 100;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-        }
-
-        .mark-show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .explanation-box {
-            background: #FFF;
-            border-radius: 15px;
-            padding: 20px;
-            border: 4px solid #FFD700;
-            margin-top: 10px;
-        }
-
-        /* 🌟 キャラゲット・ゴール演出 */
-        .overlay-full {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 300;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .overlay-msg {
-            font-size: 32px;
-            font-weight: bold;
-            color: #FF1493;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            text-shadow: 2px 2px 0 #FFF;
-        }
-
-        .goal-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        .pop-anim {
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes popIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            80% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* 管理メニュー */
-        .admin-box {
-            background: #f0f8ff;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .btn-small {
-            padding: 8px;
-            font-size: 14px;
-            background-color: #95A5A6;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -545,7 +45,7 @@
                     <button class="btn-small" onclick="resetData()">最初からやり直す</button>
                 </div>
             </details>
-            <p style="margin-top: 15px; font-size: 12px; color: #aaa;">v1.1</p>
+            <p style="margin-top: 15px; font-size: 12px; color: #aaa;">v1.3</p>
         </div>
 
         <!-- 🤔 2. クイズ画面 -->
@@ -613,77 +113,7 @@
         /* =========================================================
            1. 英単語データ (英検5級 260語)
            ========================================================= */
-        const wordsData = [
-            { word: "play", meaning: "あそぶ" }, { word: "run", meaning: "はしる" }, { word: "walk", meaning: "あるく" }, { word: "swim", meaning: "およぐ" },
-            { word: "eat", meaning: "たべる" }, { word: "drink", meaning: "のむ" }, { word: "like", meaning: "すき" }, { word: "have", meaning: "もっている" },
-            { word: "go", meaning: "いく" }, { word: "come", meaning: "くる" }, { word: "see", meaning: "みる" }, { word: "look", meaning: "みる" },
-            { word: "watch", meaning: "みる" }, { word: "read", meaning: "よむ" }, { word: "write", meaning: "かく" }, { word: "listen", meaning: "きく" },
-            { word: "speak", meaning: "はなす" }, { word: "say", meaning: "いう" }, { word: "study", meaning: "べんきょうする" }, { word: "make", meaning: "つくる" },
-            { word: "use", meaning: "つかう" }, { word: "help", meaning: "てつだう" }, { word: "wash", meaning: "あらう" }, { word: "clean", meaning: "そうじする" },
-            { word: "cook", meaning: "りょうりする" }, { word: "sing", meaning: "うたう" }, { word: "dance", meaning: "おどる" }, { word: "sleep", meaning: "ねる" },
-            { word: "buy", meaning: "かう" }, { word: "open", meaning: "あける" }, { word: "close", meaning: "しめる" }, { word: "stop", meaning: "とまる" },
-            { word: "sit", meaning: "すわる" }, { word: "know", meaning: "しっている" }, { word: "want", meaning: "ほしい" }, { word: "meet", meaning: "あう" },
-            { word: "apple", meaning: "りんご" }, { word: "dog", meaning: "いぬ" }, { word: "cat", meaning: "ねこ" }, { word: "bird", meaning: "とり" },
-            { word: "fish", meaning: "さかな" }, { word: "bear", meaning: "くま" }, { word: "rabbit", meaning: "うさぎ" }, { word: "red", meaning: "あか" },
-            { word: "blue", meaning: "あお" }, { word: "yellow", meaning: "きいろ" }, { word: "green", meaning: "みどり" }, { word: "white", meaning: "しろ" },
-            { word: "black", meaning: "くろ" }, { word: "one", meaning: "１" }, { word: "two", meaning: "２" }, { word: "three", meaning: "３" },
-            { word: "four", meaning: "４" }, { word: "five", meaning: "５" }, { word: "six", meaning: "６" }, { word: "seven", meaning: "７" },
-            { word: "eight", meaning: "８" }, { word: "nine", meaning: "９" }, { word: "ten", meaning: "１０" }, { word: "book", meaning: "ほん" },
-            { word: "pen", meaning: "ペン" }, { word: "bag", meaning: "かばん" }, { word: "desk", meaning: "つくえ" }, { word: "chair", meaning: "いす" },
-            { word: "car", meaning: "くるま" }, { word: "train", meaning: "でんしゃ" }, { word: "house", meaning: "いえ" }, { word: "school", meaning: "がっこう" },
-            { word: "park", meaning: "こうえん" }, { word: "morning", meaning: "あさ" }, { word: "night", meaning: "よる" }, { word: "eye", meaning: "め" },
-            { word: "ear", meaning: "みみ" }, { word: "hand", meaning: "て" }, { word: "foot", meaning: "あし" }, { word: "sun", meaning: "たいよう" },
-            { word: "water", meaning: "みず" }, { word: "milk", meaning: "ぎゅうにゅう" }, { word: "I", meaning: "わたし" }, { word: "you", meaning: "あなた" },
-            { word: "he", meaning: "かれ" }, { word: "she", meaning: "かのじょ" }, { word: "what", meaning: "なに" }, { word: "who", meaning: "だれ" },
-            { word: "where", meaning: "どこ" }, { word: "when", meaning: "いつ" }, { word: "hot", meaning: "あつい" }, { word: "cold", meaning: "さむい" },
-            { word: "jump", meaning: "とぶ" }, { word: "smile", meaning: "わらう" }, { word: "cry", meaning: "なく" }, { word: "fly", meaning: "とぶ" },
-            { word: "touch", meaning: "さわる" }, { word: "pull", meaning: "ひく" }, { word: "push", meaning: "おす" }, { word: "bring", meaning: "もってくる" },
-            { word: "carry", meaning: "はこぶ" }, { word: "climb", meaning: "のぼる" }, { word: "drop", meaning: "おとす" }, { word: "fall", meaning: "おちる" },
-            { word: "hold", meaning: "もつ" }, { word: "keep", meaning: "たもつ" }, { word: "leave", meaning: "はなれる" }, { word: "lose", meaning: "なくす" },
-            { word: "pick", meaning: "えらぶ" }, { word: "ride", meaning: "のる" }, { word: "send", meaning: "おくる" }, { word: "show", meaning: "みせる" },
-            { word: "spend", meaning: "すごす" }, { word: "throw", meaning: "なげる" }, { word: "understand", meaning: "わかる" }, { word: "wear", meaning: "きる" },
-            { word: "win", meaning: "かつ" }, { word: "work", meaning: "はたらく" }, { word: "agree", meaning: "さんせいする" }, { word: "answer", meaning: "こたえる" },
-            { word: "arrive", meaning: "つく" }, { word: "ask", meaning: "きく" }, { word: "begin", meaning: "はじめる" }, { word: "believe", meaning: "しんじる" },
-            { word: "call", meaning: "よぶ" }, { word: "change", meaning: "かえる" }, { word: "decide", meaning: "きめる" }, { word: "explain", meaning: "せつめいする" },
-            { word: "finish", meaning: "おわる" }, { word: "follow", meaning: "したがう" }, { word: "happen", meaning: "おこる" }, { word: "hope", meaning: "のぞむ" },
-            { word: "mean", meaning: "いみする" }, { word: "remember", meaning: "おぼえている" }, { word: "return", meaning: "かえる" }, { word: "save", meaning: "たすける" },
-            { word: "seem", meaning: "みえる" }, { word: "stand", meaning: "たつ" }, { word: "stay", meaning: "とまる" }, { word: "visit", meaning: "たずねる" },
-            { word: "wait", meaning: "まつ" }, { word: "winter", meaning: "ふゆ" }, { word: "spring", meaning: "はる" }, { word: "summer", meaning: "なつ" },
-            { word: "autumn", meaning: "あき" }, { word: "family", meaning: "かぞく" }, { word: "brother", meaning: "きょうだい" }, { word: "sister", meaning: "しまい" },
-            { word: "cousin", meaning: "いとこ" }, { word: "uncle", meaning: "おじ" }, { word: "aunt", meaning: "おば" }, { word: "parent", meaning: "おや" },
-            { word: "breakfast", meaning: "あさごはん" }, { word: "lunch", meaning: "ひるごはん" }, { word: "dinner", meaning: "ばんごはん" }, { word: "snack", meaning: "おやつ" },
-            { word: "kitchen", meaning: "だいどころ" }, { word: "garden", meaning: "にわ" }, { word: "bathroom", meaning: "おふろ" }, { word: "window", meaning: "まど" },
-            { word: "wall", meaning: "かべ" }, { word: "floor", meaning: "ゆか" }, { word: "stairs", meaning: "かいだん" }, { word: "table", meaning: "テーブル" },
-            { word: "chair", meaning: "いす" }, { word: "bed", meaning: "ベッド" }, { word: "pillow", meaning: "まくら" }, { word: "blanket", meaning: "もうふ" },
-            { word: "towel", meaning: "タオル" }, { word: "soap", meaning: "せっけん" }, { word: "brush", meaning: "ブラシ" }, { word: "plate", meaning: "おさら" },
-            { word: "glass", meaning: "グラス" }, { word: "fork", meaning: "フォーク" }, { word: "knife", meaning: "ナイフ" }, { word: "spoon", meaning: "スプーン" },
-            { word: "cup", meaning: "カップ" }, { word: "bottle", meaning: "びん" }, { word: "key", meaning: "かぎ" }, { word: "phone", meaning: "でんわ" },
-            { word: "paper", meaning: "かみ" }, { word: "box", meaning: "はこ" }, { word: "bag", meaning: "かばん" }, { word: "pocket", meaning: "ポケット" },
-            { word: "coin", meaning: "コイン" }, { word: "card", meaning: "カード" }, { word: "ticket", meaning: "チケット" }, { word: "news", meaning: "ニュース" },
-            { word: "radio", meaning: "ラジオ" }, { word: "piano", meaning: "ピアノ" }, { word: "guitar", meaning: "ギター" }, { word: "flute", meaning: "フルート" },
-            { word: "trumpet", meaning: "トランペット" }, { word: "violin", meaning: "バイオリン" }, { word: "drum", meaning: "ドラム" }, { word: "song", meaning: "うた" },
-            { word: "artist", meaning: "げいじゅつか" }, { word: "actor", meaning: "はいゆう" }, { word: "singer", meaning: "かしゅ" }, { word: "dancer", meaning: "ダンサー" },
-            { word: "doctor", meaning: "いしゃ" }, { word: "nurse", meaning: "かんごし" }, { word: "dentist", meaning: "はいしゃ" }, { word: "driver", meaning: "うんてんしゅ" },
-            { word: "pilot", meaning: "パイロット" }, { word: "cook", meaning: "コック" }, { word: "baker", meaning: "パンや" }, { word: "farmer", meaning: "のうか" },
-            { word: "police", meaning: "けいさつ" }, { word: "fireman", meaning: "しょうぼうし" }, { word: "postman", meaning: "ゆうびんや" }, { word: "clerk", meaning: "てんいん" },
-            { word: "manager", meaning: "かんりしゃ" }, { word: "officer", meaning: "こうむいん" }, { word: "soldier", meaning: "へいし" }, { word: "king", meaning: "おうさま" },
-            { word: "queen", meaning: "じょおう" }, { word: "prince", meaning: "おうじ" }, { word: "princess", meaning: "おうじょ" }, { word: "hero", meaning: "ヒーロー" },
-            { word: "star", meaning: "ほし" }, { word: "moon", meaning: "つき" }, { word: "sun", meaning: "たいよう" }, { word: "sky", meaning: "そら" },
-            { word: "cloud", meaning: "くも" }, { word: "rain", meaning: "あめ" }, { word: "snow", meaning: "ゆき" }, { word: "wind", meaning: "かぜ" },
-            { word: "storm", meaning: "あらし" }, { word: "sea", meaning: "うみ" }, { word: "river", meaning: "かわ" }, { word: "lake", meaning: "みずうみ" },
-            { word: "mountain", meaning: "やま" }, { word: "forest", meaning: "もり" }, { word: "island", meaning: "しま" }, { word: "beach", meaning: "はまべ" },
-            { word: "flower", meaning: "はな" }, { word: "tree", meaning: "き" }, { word: "grass", meaning: "くさ" }, { word: "leaf", meaning: "はっぱ" },
-            { word: "fruit", meaning: "くだもの" }, { word: "vegetable", meaning: "やさい" }, { word: "earth", meaning: "ちきゅう" }, { word: "world", meaning: "せかい" },
-            { word: "space", meaning: "うちゅう" }, { word: "time", meaning: "じかん" }, { word: "clock", meaning: "とけい" }, { word: "watch", meaning: "うでどけい" },
-            { word: "calendar", meaning: "カレンダー" }, { word: "day", meaning: "ひ" }, { word: "week", meaning: "しゅう" }, { word: "month", meaning: "つき" },
-            { word: "year", meaning: "とし" }, { word: "season", meaning: "きせつ" }, { word: "holiday", meaning: "きゅうじつ" }, { word: "birthday", meaning: "たんじょうび" },
-            { word: "party", meaning: "パーティー" }, { word: "game", meaning: "ゲーム" }, { word: "toy", meaning: "おもちゃ" }, { word: "doll", meaning: "にんぎょう" },
-            { word: "ball", meaning: "ボール" }, { word: "kite", meaning: "たこ" }, { word: "bicycle", meaning: "じてんしゃ" }, { word: "motorcycle", meaning: "オートバイ" },
-            { word: "airplane", meaning: "ひこうき" }, { word: "helicopter", header: "ヘリコプター" }, { word: "rocket", meaning: "ロケット" }, { word: "ship", meaning: "ふね" },
-            { word: "boat", meaning: "ボート" }, { word: "submarine", meaning: "せんすいかん" }, { word: "truck", meaning: "トラック" }, { word: "taxi", meaning: "タクシー" },
-            { word: "ambulance", meaning: "きゅうきゅうしゃ" }, { word: "fire engine", meaning: "しょうぼうしゃ" }, { word: "police car", meaning: "パトカー" }, { word: "tank", meaning: "せんしゃ" },
-            { word: "bridge", meaning: "はし" }, { word: "road", meaning: "みち" }, { word: "street", meaning: "とおり" }, { word: "tunnel", meaning: "トンネル" }
-        ];
+        let wordsData = []; // CSVから読み込むためにletに変更し、空配列で初期化
 
         /* =========================================================
            2. キャラクターとすごろく設定
@@ -703,6 +133,54 @@
             unlocked: { chiikawa: false, usagi: false, hachiware: false, kurimanju: false, momonga: false }
         };
 
+        let currentPos = 0;
+        let friendsCount = 0;
+
+        // CSVからデータを読み込む関数
+        async function loadWordsData() {
+            try {
+                // キャッシュ回避のためクエリパラメータを追加
+                const response = await fetch('words.csv?' + new Date().getTime());
+                if (!response.ok) throw new Error('Network response was not ok');
+                const text = await response.text();
+
+                // 改行で分割し、1行目のヘッダーを除外
+                const lines = text.trim().split('\n');
+                lines.shift(); // ヘッダーを削除
+
+                wordsData = lines.map(line => {
+                    const [word, meaning] = line.split(',');
+                    return { word: word.trim(), meaning: meaning.trim() };
+                }).filter(item => item.word && item.meaning);
+
+                console.log('Words loaded:', wordsData.length);
+                return true;
+            } catch (error) {
+                console.error('Error loading words.csv:', error);
+                alert('単語データの読み込みに失敗しました。ページをリロードしてください。');
+                return false;
+            }
+        }
+
+        /* ---------------------------------------------------------
+           起動時の初期化
+           --------------------------------------------------------- */
+        async function initGame() {
+            // まずCSVから単語データをロード
+            const loaded = await loadWordsData();
+            if (!loaded) return; // ロード失敗時は進まない
+
+            // 進行状況の読み込み
+            if (localStorage.getItem('chiikawaEnglishPos')) {
+                currentPos = parseInt(localStorage.getItem('chiikawaEnglishPos'), 10);
+                friendsCount = parseInt(localStorage.getItem('chiikawaEnglishFriends'), 10) || 0;
+            }
+            createSugorokuBoard();
+            updateFriendsDisplay();
+        }
+
+        window.addEventListener('load', initGame);
+
         // --- データ読み込み＆保存 ---
         function loadData() {
             const saved = localStorage.getItem('mioriSugorokuStats');
@@ -713,10 +191,15 @@
             renderFriends();
         }
         function saveData() { localStorage.setItem('mioriSugorokuStats', JSON.stringify(gameStats)); }
+        // 管理用リセット関数
         function resetData() {
-            if (confirm("ほんとうに さいしょから やりなおす？")) {
-                localStorage.removeItem('mioriSugorokuStats');
-                location.reload();
+            if (confirm("本当にデータをリセットしますか？最初からになります。")) {
+                localStorage.removeItem('chiikawaEnglishPos');
+                localStorage.removeItem('chiikawaEnglishFriends');
+                currentPos = 0;
+                friendsCount = 0;
+                createSugorokuBoard();
+                updateFriendsDisplay();
             }
         }
 
@@ -807,36 +290,91 @@
            ========================================================= */
         let englishVoice = null;
         let audioCtx = null;
+        let speechUnlocked = false;
+        let ttsAudio = null; // Audio要素の再利用
+
+        // PWAスタンドアロンモード検出（ホーム画面から起動した場合）
+        function isStandaloneMode() {
+            return window.navigator.standalone === true ||
+                window.matchMedia('(display-mode: standalone)').matches;
+        }
 
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            // iOS/iPadOS: AudioContextがsuspendedの場合があるので明示的にresume
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            // iOS/iPadOS: ユーザージェスチャー内でspeakを呼んでロック解除
-            speechSynthesis.cancel();
-            const dummy = new SpeechSynthesisUtterance(' ');
-            dummy.lang = 'en-US';
-            speechSynthesis.speak(dummy);
-            loadVoices();
+
+            // スタンドアロンモードではspeechSynthesisが使えないのでスキップ
+            if (!isStandaloneMode() && !speechUnlocked) {
+                const dummy = new SpeechSynthesisUtterance('.');
+                dummy.lang = 'en-US';
+                dummy.volume = 0.01;
+                dummy.rate = 10;
+                speechSynthesis.speak(dummy);
+                speechUnlocked = true;
+                loadVoices();
+            }
         }
 
         function loadVoices() {
             const v = speechSynthesis.getVoices();
+            if (v.length === 0) return;
             englishVoice = v.find(x => x.lang === 'en-US' && x.name.includes('Samantha')) ||
                 v.find(x => x.lang === 'en-US' && x.name.includes('Daniel')) ||
                 v.find(x => x.lang === 'en-US') || v.find(x => x.lang.startsWith('en'));
         }
-        window.speechSynthesis.onvoiceschanged = loadVoices;
 
+        if (typeof speechSynthesis !== 'undefined') {
+            speechSynthesis.onvoiceschanged = loadVoices;
+            setTimeout(loadVoices, 500);
+            setTimeout(loadVoices, 2000);
+        }
+
+        // --- 音声再生（2モード対応） ---
         function playWordAudio(wordText) {
-            // iOS/iPadOS: キューに残った発話をクリアしないと無音になるバグ対策
-            speechSynthesis.cancel();
+            if (!wordText) return;
+
+            if (isStandaloneMode()) {
+                // PWAモード: speechSynthesisが使えないのでAudio要素で代替
+                playWordViaAudio(wordText);
+            } else {
+                // Safariブラウザモード: speechSynthesisを使用
+                playWordViaSpeech(wordText);
+            }
+        }
+
+        // 方法1: speechSynthesis（Safariブラウザ用）
+        function playWordViaSpeech(wordText) {
+            if (!englishVoice) loadVoices();
+
             const u = new SpeechSynthesisUtterance(wordText);
             u.lang = 'en-US';
-            if (!englishVoice) loadVoices();
             if (englishVoice) u.voice = englishVoice;
-            u.rate = 0.85; u.pitch = 1.1;
+            u.volume = 1;
+            u.rate = 0.85;
+            u.pitch = 1.1;
+
+            if (speechSynthesis.speaking) speechSynthesis.cancel();
+            if (speechSynthesis.paused) speechSynthesis.resume();
             speechSynthesis.speak(u);
+        }
+
+        // 方法2: Google翻訳TTS + Audio要素（PWAスタンドアロン用）
+        function playWordViaAudio(wordText) {
+            try {
+                // 前の再生を止める
+                if (ttsAudio) {
+                    ttsAudio.pause();
+                    ttsAudio.currentTime = 0;
+                }
+                const url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=' + encodeURIComponent(wordText);
+                ttsAudio = new Audio(url);
+                ttsAudio.volume = 1;
+                ttsAudio.play().catch(function (e) {
+                    console.log('TTS audio fallback failed:', e);
+                });
+            } catch (e) {
+                console.log('TTS error:', e);
+            }
         }
 
         function playCorrectSound() {
@@ -925,8 +463,7 @@
                 const listenBtn = document.createElement('button');
                 listenBtn.className = 'listen-btn';
                 listenBtn.innerHTML = `🔊<span>きく</span>`;
-                listenBtn.onclick = (e) => {
-                    e.stopPropagation(); // 選択ボタンを押したことにさせない
+                listenBtn.onclick = () => {
                     playWordAudio(text);
                 };
 
