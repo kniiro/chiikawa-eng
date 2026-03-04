@@ -545,7 +545,7 @@
                     <button class="btn-small" onclick="resetData()">最初からやり直す</button>
                 </div>
             </details>
-            <p style="margin-top: 15px; font-size: 12px; color: #aaa;">v1.0</p>
+            <p style="margin-top: 15px; font-size: 12px; color: #aaa;">v1.1</p>
         </div>
 
         <!-- 🤔 2. クイズ画面 -->
@@ -812,10 +812,10 @@
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             // iOS/iPadOS: AudioContextがsuspendedの場合があるので明示的にresume
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            // iOS/iPadOS: 空の発話でSpeechSynthesisのロックを解除
+            // iOS/iPadOS: ユーザージェスチャー内でspeakを呼んでロック解除
             speechSynthesis.cancel();
-            const dummy = new SpeechSynthesisUtterance('');
-            dummy.volume = 0;
+            const dummy = new SpeechSynthesisUtterance(' ');
+            dummy.lang = 'en-US';
             speechSynthesis.speak(dummy);
             loadVoices();
         }
@@ -831,15 +831,12 @@
         function playWordAudio(wordText) {
             // iOS/iPadOS: キューに残った発話をクリアしないと無音になるバグ対策
             speechSynthesis.cancel();
-
-            setTimeout(() => {
-                const u = new SpeechSynthesisUtterance(wordText);
-                u.lang = 'en-US';
-                if (!englishVoice) loadVoices();
-                if (englishVoice) u.voice = englishVoice;
-                u.rate = 0.85; u.pitch = 1.1;
-                speechSynthesis.speak(u);
-            }, 100); // iOS向けに少し遅延させる
+            const u = new SpeechSynthesisUtterance(wordText);
+            u.lang = 'en-US';
+            if (!englishVoice) loadVoices();
+            if (englishVoice) u.voice = englishVoice;
+            u.rate = 0.85; u.pitch = 1.1;
+            speechSynthesis.speak(u);
         }
 
         function playCorrectSound() {
