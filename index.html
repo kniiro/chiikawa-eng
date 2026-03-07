@@ -29,7 +29,7 @@
             <div class="sugoroku-container">
                 <p style="margin: 0 0 5px; font-weight: bold; color: #FF1493; font-size: 18px;">いま <span
                         id="current-space-text" style="font-size:24px;">0</span> マスめ！</p>
-                <p style="margin: 0; font-size: 12px; color: #555;">8もん せいかいで 1マスすすむよ！</p>
+                <p style="margin: 0; font-size: 12px; color: #555;">7もん せいかいで 1マスすすむよ！</p>
 
                 <!-- すごろくのマス目（JSで自動生成） -->
                 <div class="sugoroku-grid" id="board-grid"></div>
@@ -455,7 +455,7 @@
 
         // --- リザルト＆すごろく処理 ---
         function showResult() {
-            const isSuccess = score >= 8; // 8問以上で1マス進む
+            const isSuccess = score >= 7; // 7問以上で1マス進む
             let moved = false;
 
             if (isSuccess && gameStats.space < TOTAL_SPACES) {
