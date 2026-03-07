@@ -6,9 +6,12 @@ from gtts import gTTS
 def main():
     csv_file = 'words.csv'
     output_dir = 'audio'
+    upload_dir = 'audio_upload'
     
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
         
     print(f"Reading from {csv_file}")
     
@@ -35,7 +38,13 @@ def main():
             try:
                 tts = gTTS(text=word, lang='en')
                 tts.save(output_path)
-                print(f"Generated: {output_path}")
+                
+                # Copy to upload dir
+                upload_path = os.path.join(upload_dir, safe_filename)
+                import shutil
+                shutil.copy2(output_path, upload_path)
+                
+                print(f"Generated: {output_path} (copied to {upload_dir})")
                 count += 1
                 
                 # API制限対策・行儀よくするために少しsleepする

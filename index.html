@@ -63,6 +63,7 @@
             <div id="explanation-area" class="hidden explanation-box">
                 <p style="margin:0; font-weight:bold; color:#777;">せいかいは…</p>
                 <h3 id="exp-word" style="font-size: 36px; margin: 5px 0;">apple</h3>
+                <p id="exp-example" style="font-size: 16px; margin: 10px 0; color: #555;"></p>
                 <button class="action-btn"
                     style="margin-top: 15px; background-color: #32CD32; box-shadow: 0 6px #228B22;"
                     onclick="nextQuestion()">つぎへ！</button>
@@ -149,9 +150,27 @@
                 lines.shift(); // ヘッダーを削除
 
                 wordsData = lines.map(line => {
-                    const [word, meaning] = line.split(',');
-                    return { word: word.trim(), meaning: meaning.trim() };
-                }).filter(item => item.word && item.meaning);
+                    const firstComma = line.indexOf(',');
+                    const secondComma = line.indexOf(',', firstComma + 1);
+
+                    if (firstComma === -1) return null;
+
+                    const word = line.substring(0, firstComma).trim();
+                    let meaning = '';
+                    let example = '';
+
+                    if (secondComma !== -1) {
+                        meaning = line.substring(firstComma + 1, secondComma).trim();
+                        example = line.substring(secondComma + 1).trim();
+                        if (example.startsWith('"') && example.endsWith('"')) {
+                            example = example.substring(1, example.length - 1);
+                        }
+                    } else {
+                        meaning = line.substring(firstComma + 1).trim();
+                    }
+
+                    return { word, meaning, example };
+                }).filter(item => item && item.word && item.meaning);
 
                 console.log('Words loaded:', wordsData.length);
                 return true;
@@ -441,8 +460,10 @@
 
             setTimeout(() => mark.className = 'feedback-mark', 800);
 
-            // 答えあわせに正解の英単語を表示し、自動で発音する
+            // 答えあわせに正解の英単語と例文を表示し、自動で発音する
+            const correctData = currentQuizSet[currentQuestionIndex];
             document.getElementById('exp-word').innerText = correct;
+            document.getElementById('exp-example').innerText = correctData.example || '';
             document.getElementById('explanation-area').classList.remove('hidden');
             setTimeout(() => { playWordAudio(correct); }, 300);
         }

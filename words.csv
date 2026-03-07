@@ -1,277 +1,573 @@
-word,meaning
-play,あそぶ
-run,はしる
-walk,あるく
-swim,およぐ
-eat,たべる
-drink,のむ
-like,すき
-have,もっている
-go,いく
-come,くる
-see,みる
-look,みる
-watch,みる
-read,よむ
-write,かく
-listen,きく
-speak,はなす
-say,いう
-study,べんきょうする
-make,つくる
-use,つかう
-help,てつだう
-wash,あらう
-clean,そうじする
-cook,りょうりする
-sing,うたう
-dance,おどる
-sleep,ねる
-buy,かう
-open,あける
-close,しめる
-stop,とまる
-sit,すわる
-know,しっている
-want,ほしい
-meet,あう
-apple,りんご
-dog,いぬ
-cat,ねこ
-bird,とり
-fish,さかな
-bear,くま
-rabbit,うさぎ
-red,あか
-blue,あお
-yellow,きいろ
-green,みどり
-white,しろ
-black,くろ
-one,１
-two,２
-three,３
-four,４
-five,５
-six,６
-seven,７
-eight,８
-nine,９
-ten,１０
-book,ほん
-pen,ペン
-bag,かばん
-desk,つくえ
-chair,いす
-car,くるま
-train,でんしゃ
-house,いえ
-school,がっこう
-park,こうえん
-morning,あさ
-night,よる
-eye,め
-ear,みみ
-hand,て
-foot,あし
-sun,たいよう
-water,みず
-milk,ぎゅうにゅう
-I,わたし
-you,あなた
-he,かれ
-she,かのじょ
-what,なに
-who,だれ
-where,どこ
-when,いつ
-hot,あつい
-cold,さむい
-jump,とぶ
-smile,わらう
-cry,なく
-fly,とぶ
-touch,さわる
-pull,ひく
-push,おす
-bring,もってくる
-carry,はこぶ
-climb,のぼる
-drop,おとす
-fall,おちる
-hold,もつ
-keep,たもつ
-leave,はなれる
-lose,なくす
-pick,えらぶ
-ride,のる
-send,おくる
-show,みせる
-spend,すごす
-throw,なげる
-understand,わかる
-wear,きる
-win,かつ
-work,はたらく
-agree,さんせいする
-answer,こたえる
-arrive,つく
-ask,きく
-begin,はじめる
-believe,しんじる
-call,よぶ
-change,かえる
-decide,きめる
-explain,せつめいする
-finish,おわる
-follow,したがう
-happen,おこる
-hope,のぞむ
-mean,いみする
-remember,おぼえている
-return,かえる
-save,たすける
-seem,みえる
-stand,たつ
-stay,とまる
-visit,たずねる
-wait,まつ
-winter,ふゆ
-spring,はる
-summer,なつ
-autumn,あき
-family,かぞく
-brother,きょうだい
-sister,しまい
-cousin,いとこ
-uncle,おじ
-aunt,おば
-parent,おや
-breakfast,あさごはん
-lunch,ひるごはん
-dinner,ばんごはん
-snack,おやつ
-kitchen,だいどころ
-garden,にわ
-bathroom,おふろ
-window,まど
-wall,かべ
-floor,ゆか
-stairs,かいだん
-table,テーブル
-chair,いす
-bed,ベッド
-pillow,まくら
-blanket,もうふ
-towel,タオル
-soap,せっけん
-brush,ブラシ
-plate,おさら
-glass,グラス
-fork,フォーク
-knife,ナイフ
-spoon,スプーン
-cup,カップ
-bottle,びん
-key,かぎ
-phone,でんわ
-paper,かみ
-box,はこ
-bag,かばん
-pocket,ポケット
-coin,コイン
-card,カード
-ticket,チケット
-news,ニュース
-radio,ラジオ
-piano,ピアノ
-guitar,ギター
-flute,フルート
-trumpet,トランペット
-violin,バイオリン
-drum,ドラム
-song,うた
-artist,げいじゅつか
-actor,はいゆう
-singer,かしゅ
-dancer,ダンサー
-doctor,いしゃ
-nurse,かんごし
-dentist,はいしゃ
-driver,うんてんしゅ
-pilot,パイロット
-cook,コック
-baker,パンや
-farmer,のうか
-police,けいさつ
-fireman,しょうぼうし
-postman,ゆうびんや
-clerk,てんいん
-manager,かんりしゃ
-officer,こうむいん
-soldier,へいし
-king,おうさま
-queen,じょおう
-prince,おうじ
-princess,おうじょ
-hero,ヒーロー
-star,ほし
-moon,つき
-sun,たいよう
-sky,そら
-cloud,くも
-rain,あめ
-snow,ゆき
-wind,かぜ
-storm,あらし
-sea,うみ
-river,かわ
-lake,みずうみ
-mountain,やま
-forest,もり
-island,しま
-beach,はまべ
-flower,はな
-tree,き
-grass,くさ
-leaf,はっぱ
-fruit,くだもの
-vegetable,やさい
-earth,ちきゅう
-world,せかい
-space,うちゅう
-time,じかん
-clock,とけい
-watch,うでどけい
-calendar,カレンダー
-day,ひ
-week,しゅう
-month,つき
-year,とし
-season,きせつ
-holiday,きゅうじつ
-birthday,たんじょうび
-party,パーティー
-game,ゲーム
-toy,おもちゃ
-doll,にんぎょう
-ball,ボール
-kite,たこ
-bicycle,じてんしゃ
-motorcycle,オートバイ
-airplane,ひこうき
-helicopter,ヘリコプター
-rocket,ロケット
-ship,ふね
-boat,ボート
-submarine,せんすいかん
-truck,トラック
-taxi,タクシー
-ambulance,きゅうきゅうしゃ
-fire engine,しょうぼうしゃ
-police car,パトカー
-tank,せんしゃ
-bridge,はし
-road,みち
-street,とおり
-tunnel,トンネル
+word,meaning,example
+dog,いぬ,I have a dog.
+cat,ねこ,My cat is cute.
+bird,とり,Look at that bird.
+fish,さかな,I like fish.
+pig,ぶた,The pig is pink.
+cow,うし,That is a big cow.
+horse,うま,He rides a horse.
+bear,くま,There is a bear in the forest.
+monkey,さる,The monkey is eating a banana.
+lion,ライオン,Lions are strong.
+tiger,トラ,The tiger is fast.
+elephant,ぞう,An elephant has a long nose.
+rabbit,うさぎ,The rabbit is eating a carrot.
+mouse,ねずみ,The mouse is small.
+apple,りんご,I eat an apple.
+orange,オレンジ,Do you like oranges?
+banana,バナナ,This banana is sweet.
+peach,もも,I bought a peach.
+grape,ぶどう,These grapes are good.
+lemon,レモン,The lemon is sour.
+tomato,トマト,I like tomatoes.
+potato,じゃがいも,I like potatoes.
+carrot,にんじん,Rabbits like carrots.
+onion,たまねぎ,I cut an onion.
+bread,パン,I eat bread for breakfast.
+rice,ごはん,I eat rice every day.
+meat,にく,I like meat.
+beef,ぎゅうにく,We eat beef.
+pork,ぶたにく,I cook pork.
+chicken,とりにく,I like fried chicken.
+egg,たまご,I eat an egg.
+milk,ぎゅうにゅう,I drink milk.
+water,みず,I want some water.
+tea,おちゃ,Do you drink tea?
+coffee,コーヒー,My father drinks coffee.
+juice,ジュース,I like orange juice.
+cake,ケーキ,I made a cake.
+head,あたま,My head hurts.
+face,かお,Wash your face.
+eye,め,Close your eyes.
+ear,みみ,My ears are cold.
+nose,はな,He has a big nose.
+mouth,くち,Open your mouth.
+tooth,は,Brush your teeth.
+hair,かみのけ,She has long hair.
+arm,うで,He has strong arms.
+hand,て,Wash your hands.
+finger,ゆび,I have ten fingers.
+leg,あし,My legs are tired.
+foot,あし（くるぶしから下）,My left foot hurts.
+father,お父さん,My father is tall.
+mother,お母さん,My mother is kind.
+brother,兄・弟,I have a brother.
+sister,姉・妹,My sister is cute.
+grandfather,おじいさん,My grandfather is old.
+grandmother,おばあさん,My grandmother is nice.
+uncle,おじ,My uncle lives in Tokyo.
+aunt,おば,My aunt is a teacher.
+cousin,いとこ,My cousin is five.
+family,かぞく,I love my family.
+house,家,This is my house.
+room,部屋,My room is clean.
+door,ドア,Open the door.
+window,窓,Close the window.
+wall,壁,The wall is white.
+floor,床,Sit on the floor.
+roof,屋根,The roof is red.
+bed,ベッド,I sleep in my bed.
+desk,机,This is my desk.
+chair,いす,Sit on the chair.
+table,テーブル,The book is on the table.
+bath,おふろ,I take a bath.
+kitchen,台所,My mother is in the kitchen.
+garden,庭,There is a tree in the garden.
+yard,庭・中庭,We play in the yard.
+park,公園,Let's go to the park.
+school,学校,I go to school.
+hospital,病院,He is in the hospital.
+bank,銀行,My mother goes to the bank.
+station,駅,Where is the station?
+store,お店,I go to the store.
+shop,お店,This is a cake shop.
+street,道・通り,Walk down the street.
+road,道,The road is long.
+town,町,My town is small.
+city,都市・市,Tokyo is a big city.
+country,国・田舎,Japan is a small country.
+world,世界,The world is big.
+sun,太陽,The sun is hot.
+moon,月,Look at the moon.
+star,星,I see a star.
+sky,空,The sky is blue.
+cloud,雲,There are many clouds.
+rain,雨,I don't like rain.
+snow,雪,I like snow.
+wind,風,The wind is strong.
+fire,火,The fire is warm.
+tree,木,That is a tall tree.
+flower,花,This flower is beautiful.
+grass,草,The grass is green.
+time,時間,What time is it?
+clock,時計(壁掛け),Look at the clock.
+watch,時計(腕時計),I have a new watch.
+morning,朝,Good morning.
+noon,昼の１２時,Let's eat at noon.
+afternoon,午後,Good afternoon.
+evening,夕方,Good evening.
+night,夜,Good night.
+day,日・１日,Have a nice day.
+today,今日,Today is sunny.
+tomorrow,明日,See you tomorrow.
+yesterday,昨日,I played baseball yesterday.
+week,週,There are seven days in a week.
+month,月,A year has twelve months.
+year,年・１年,Happy New Year!
+spring,春,I like spring.
+summer,夏,Summer is hot.
+fall,秋,Fall is cool.
+autumn,秋,I like autumn in Japan.
+winter,冬,Winter is cold.
+Monday,月曜日,Today is Monday.
+Tuesday,火曜日,I play tennis on Tuesday.
+Wednesday,水曜日,We have music on Wednesday.
+Thursday,木曜日,She studies long on Thursday.
+Friday,金曜日,I like Friday.
+Saturday,土曜日,I don't go to school on Saturday.
+Sunday,日曜日,We play on Sunday.
+red,赤,I have a red pen.
+blue,青,The sky is blue.
+yellow,黄,Bananas are yellow.
+green,緑,The grass is green.
+white,白,Snow is white.
+black,黒,My cat is black.
+brown,茶色,That dog is brown.
+pink,ピンク色,She likes pink.
+orange (色),オレンジ色,I wear an orange shirt.
+purple,紫色,Grapes are purple.
+gray,灰色,The clouds are gray.
+color,色,What color is this?
+one,１,I have one apple.
+two,２,I have two dogs.
+three,３,There are three birds.
+four,４,A car has four wheels.
+five,５,She is five years old.
+six,６,I have six pencils.
+seven,７,There are seven days in a week.
+eight,８,An octopus has eight legs.
+nine,９,He is nine years old.
+ten,１０,I have ten fingers.
+eleven,１１,I am eleven years old.
+twelve,１２,There are twelve months.
+twenty,２０,I have twenty CDs.
+thirty,３０,My mother is thirty years old.
+forty,４０,My father is forty.
+fifty,５０,This is fifty yen.
+hundred,１００,This is one hundred yen.
+first,一番目・最初,He is the first runner.
+second,二番目,This is his second book.
+third,三番目,She is the third student.
+shirt,シャツ,This is a new shirt.
+T-shirt,Tシャツ,I wear a T-shirt.
+sweater,セーター,That sweater is warm.
+coat,コート,Put on your coat.
+hat,帽子,Take off your hat.
+cap,帽子(野球帽),He wears a blue cap.
+shoe,靴,These are my shoes.
+sock,靴下,My socks are white.
+skirt,スカート,She wears a red skirt.
+dress,ドレス,Her dress is beautiful.
+pants,ズボン,He wears black pants.
+glasses,めがね,My father wears glasses.
+man,男の人,That man is tall.
+woman,女の人,She is a kind woman.
+boy,男の子,He is a good boy.
+girl,女の子,She is a cute girl.
+child,子ども,The child is playing.
+people,人々,Many people are in the park.
+friend,友達,She is my friend.
+teacher,先生,Mr. Smith is a teacher.
+student,生徒,I am a junior high school student.
+doctor,医者,My uncle is a doctor.
+nurse,看護師,My aunt is a nurse.
+police officer,警察官,He is a police officer.
+farmer,農家,My grandfather is a farmer.
+pilot,パイロット,I want to be a pilot.
+driver,運転手,She is a bus driver.
+cook,コック・料理人,He is a good cook.
+singer,歌手,She is a popular singer.
+player,選手,He is a baseball player.
+fan,ファン,I am a big fan.
+king,王様,The king is old.
+queen,女王,The queen is beautiful.
+class,クラス・授業,We have English class today.
+classroom,教室,Our classroom is large.
+lesson,授業,I have a piano lesson.
+test,テスト,We have a math test today.
+homework,宿題,Do your homework.
+math,数学・算数,He likes math.
+science,理科,Science is fun.
+history,歴史,I study history.
+music,音楽,I listen to music.
+art,美術,I like art.
+English,英語,I speak English.
+Japanese,国語・日本語,I speak Japanese.
+book,本,I read a book.
+notebook,ノート,This is my notebook.
+dictionary,辞書,Use a dictionary.
+pen,ペン,I have a pen.
+pencil,えんぴつ,May I borrow your pencil?
+eraser,消しゴム,I need an eraser.
+ruler,定規,This is a long ruler.
+bag,かばん,My bag is heavy.
+box,箱,What is in the box?
+picture,絵・写真,Look at this picture.
+photo,写真,Let's take a photo.
+letter,手紙,I write a letter.
+card,カード,This is a birthday card.
+ticket,切符・チケット,I have two tickets.
+money,お金,I have no money.
+coin,硬貨,I found a coin.
+stamp,切手,I collect stamps.
+key,かぎ,I lost my key.
+cup,カップ,"A cup of coffee, please."
+glass,グラス,"A glass of water, please."
+dish,皿,Please wash the dishes.
+spoon,スプーン,Use a spoon.
+fork,フォーク,Use a fork.
+knife,ナイフ,Be careful with that knife.
+TV,テレビ,I watch TV.
+computer,コンピュータ,I use a computer.
+game,ゲーム,Let's play a game.
+toy,おもちゃ,This is not a toy.
+doll,人形,My sister plays with a doll.
+ball,ボール,Throw the ball to me.
+bat,バット,He swings the bat.
+glove,グローブ,He caught the ball with his glove.
+guitar,ギター,He plays the guitar.
+piano,ピアノ,She plays the piano.
+song,歌,Sing a song.
+car,車,This car is fast.
+bus,バス,I go to school by bus.
+train,電車,The train is coming.
+bike,自転車,I ride my bike.
+bicycle,自転車,This is my bicycle.
+plane,飛行機,The plane is flying.
+ship,船,Look at that big ship.
+boat,ボート,We are in the boat.
+animal,動物,I like animals.
+sports,スポーツ,Do you like sports?
+baseball,野球,Let's play baseball.
+soccer,サッカー,They play soccer.
+tennis,テニス,I play tennis with my friend.
+basketball,バスケットボール,He is good at basketball.
+swimming,水泳,I like swimming.
+running,走ること,Running is good for you.
+reading,読書,My hobby is reading.
+hobby,趣味,What is your hobby?
+name,名前,My name is Tom.
+word,単語,I know many words.
+thing,もの,What is this thing?
+way,道・方法,This is the way to the station.
+place,場所,This is a nice place.
+part,部分・一部,We are part of the team.
+number,数・番号,What is your phone number?
+member,メンバー,I am a member of the club.
+group,グループ,Work in a group.
+party,パーティー,Let's have a party.
+trip,旅行,Have a nice trip.
+idea,考え,That is a good idea.
+point,点,He got 100 points on the test.
+line,線・列,Wait in line.
+side,側,Walk on the right side.
+front,前,The car is in front of the house.
+back,後ろ,The dog is in the back yard.
+top,頂上・上,Go to the top.
+bottom,底・下,At the bottom of the page.
+right (方向),右,Turn right at the corner.
+left,左,Walk on the left side.
+north,北,Hokkaido is in the north.
+south,南,Okinawa is in the south.
+east,東,Tokyo is in the east.
+west,西,Osaka is in the west.
+center,中心,The park is in the center.
+am,〜である・いる(Iのとき),I am a student.
+is,〜である・いる,He is my friend.
+are,〜である・いる(複数など),You are a good boy.
+was,〜だった(am/isの過去),I was busy yesterday.
+were,〜だった(areの過去),We were very tired.
+do,する,I do my homework.
+does,する(三人称単数),She does her homework.
+did,した,I did it yesterday.
+have,持っている・食べる,I have a pen.
+has,持っている(三人称単数),He has two sisters.
+play,する・遊ぶ,Let's play tennis.
+make,作る,I make breakfast.
+use,使う,May I use your pen?
+go,行く,I go to school.
+come,来る,"Come here, please."
+know,知っている,I know him.
+see,見える・会う,I see a bird.
+look,見る,Look at the picture.
+watch,見る,I watch TV every day.
+read,読む,I read a book.
+write,書く,"Write your name, please."
+speak,話す,Can you speak English?
+talk,話す,Let's talk in English.
+say,言う,What did he say?
+tell,伝える・話す,Tell me a story.
+listen,聞く,Listen to me.
+hear,聞こえる,I hear the music.
+think,思う・考える,I think so.
+want,ほしい・〜したい,I want a new bike.
+like,好む,I like apples.
+love,愛する・大好き,I love my family.
+hope,望む,I hope so.
+need,必要とする,I need some money.
+help,手伝う,Can you help me?
+work,働く,He works hard.
+study,勉強する,I study math.
+learn,学ぶ,We learn English.
+try,試す・努力する,Try again.
+start,始める,Let's start the game.
+begin,始める,The class begins at nine.
+stop,止める・止まる,Stop the car.
+finish,終える,I finished my homework.
+show,見せる,Show me your notebook.
+give,与える,Give me an apple.
+get,得る・着く,I got a present. / get up
+take,取る・乗る,Take this bus.
+bring,持ってくる,Bring your notebook.
+buy,買う,I buy a book.
+sell,売る,They sell fruits here.
+eat,食べる,I eat an egg.
+drink,飲む,I drink milk.
+cook,料理する,My father cooks well.
+wash,洗う,Wash your hands.
+clean,掃除をする,Clean your room.
+open,開ける,Open the door.
+close,閉める,Close the window.
+run,走る,He runs fast.
+walk,歩く,I walk to school.
+swim,泳ぐ,I can swim.
+jump,跳ぶ,The cat jumps high.
+fly,飛ぶ,Birds fly in the sky.
+stand,立つ,"Stand up, please."
+sit,座る,"Sit down, please."
+sleep,眠る,I sleep well.
+wake,目を覚ます,Wake up early.
+call,呼ぶ・電話する,Call me tonight.
+meet,会う,Nice to meet you.
+wait,待つ,Wait for me.
+leave,去る・出発する,The train leaves at ten.
+stay,とどまる・泊まる,Stay here.
+live,住む,I live in Japan.
+visit,訪れる,I visit my uncle.
+enjoy,楽しむ,Enjoy the party!
+teach,教える,She teaches English.
+practice,練習をする,Practice the piano.
+sing,歌う,Let's sing a song.
+dance,踊る,She dances well.
+draw,描く,Draw a picture.
+paint,（絵の具などで）描く,I paint a flower.
+catch,捕まえる,Catch the ball.
+throw,投げる,Throw the ball.
+hit,打つ・当たる,Hit the ball.
+fall,落ちる,The apple falls.
+cut,切る,Cut the cake.
+break,壊す,Don't break the window.
+put,置く,Put it on the desk.
+keep,保つ,Keep the room clean.
+hide,隠す,Hide the present.
+find,見つける,I found my key.
+lose,なくす,I lost my money.
+win,勝つ,We won the game.
+understand,理解する,Do you understand?
+remember,思い出す・覚えている,I remember his name.
+forget,忘れる,Don't forget your homework.
+smile,ほほえむ,She smiles happily.
+laugh,（声を出して）笑う,We laughed loudly.
+cry,泣く・叫ぶ,The baby is crying.
+ask,たずねる・頼む,Ask him.
+answer,答える,Answer the question.
+believe,信じる,I believe you.
+hope,望む,I hope to see you.
+care,気にする・世話,Take care.
+change,変える・変わる,Change your clothes.
+guess,推測する,Guess what?
+mean,意味する,What does it mean?
+thank,感謝する,Thank you.
+welcome,歓迎する,Welcome to Japan.
+excuse,許す,Excuse me.
+can,できる,I can swim.
+will,〜するつもり,I will go tomorrow.
+may,〜してもよい,May I help you?
+good,良い,You are a good boy.
+bad,悪い,That is a bad idea.
+great,すばらしい,That's great!
+nice,すてきな,Have a nice day.
+fine,元気な・晴れた,I am fine.
+well,健康な・よく(副),She speaks English well.
+big,大きい,This is a big box.
+large,大きい,Tokyo is a large city.
+small,小さい,My dog is small.
+little,小さい,There is a little bird.
+tall,背が高い,He is tall.
+high,高い,The mountain is high.
+short,短い・背が低い,Her hair is short.
+long,長い,It is a long way.
+heavy,重い,This bag is heavy.
+light,軽い・明るい,This box is light.
+strong,強い,He is strong.
+weak,弱い,I am weak in math.
+fast,速い,He runs fast.
+slow,遅い,The bus is slow.
+early,早い,I get up early.
+late,遅れた,Don't be late.
+new,新しい,I bought a new car.
+old,古い・年をとった,This house is old.
+young,若い,She is a young teacher.
+hot,熱い・暑い,It is hot today.
+cold,冷たい・寒い,It is cold today.
+cool,涼しい・かっこいい,It's cool today.
+warm,暖かい,The weather is warm.
+sunny,晴れの,It is sunny today.
+rainy,雨の,It is a rainy day.
+cloudy,くもりの,It is cloudy today.
+snowy,雪の,It is snowy today.
+beautiful,美しい,Look at the beautiful flower.
+pretty,かわいい,She is a pretty girl.
+cute,かわいい,Your baby is cute.
+cool,かっこいい,He looks cool.
+happy,幸せな,I am very happy.
+sad,悲しい,Why are you sad?
+angry,怒った,My mother was angry.
+hungry,空腹な,I am hungry.
+thirsty,のどが渇いた,I am thirsty.
+tired,疲れた,He is very tired.
+sleepy,眠い,I am sleepy.
+sick,病気の,He is sick in bed.
+busy,忙しい,I am busy today.
+free,ひま・自由,Are you free tomorrow?
+fun,楽しいこと,English is fun.
+funny,おもしろい,That is a funny story.
+interesting,興味深い,This book is interesting.
+easy,簡単な,The test was easy.
+hard,難しい・熱心に,Math is hard.
+difficult,難しい,This question is difficult.
+ready,用意ができて,Are you ready?
+right (正しい),正しい,That is right.
+wrong,間違った,That is wrong.
+true,本当の,Is it true?
+safe,安全な,Is it safe here?
+dangerous,危険な,It's dangerous!
+clean,きれいな,My room is clean.
+dirty,汚い,Your hands are dirty.
+full,いっぱいの,The box is full.
+empty,空の,The glass is empty.
+favorite,お気に入りの,My favorite color is red.
+popular,人気がある,This song is popular.
+famous,有名な,He is a famous singer.
+kind,親切な,She is very kind.
+poor,貧しい・かわいそうな,He is a poor man.
+rich,お金持ちの,They are rich.
+lucky,幸運な,You are lucky.
+same,同じ,We are in the same class.
+different,ちがう,This is different.
+many,たくさんの(数),I have many books.
+much,たくさんの(量),Thank you very much.
+some,いくつかの,I have some pencils.
+any,（疑問・否定で）いくつかの,Do you have any pens?
+all,すべての,All the students are here.
+every,すべての・毎〜,I play tennis every day.
+each,それぞれの,Each boy has a ball.
+another,もう一つの,Show me another one.
+other,ほかの,Where are the other boys?
+only,〜だけ,He is an only child.
+first,第一の,This is her first book.
+next,次の,See you next week.
+last,この前の・最後の,I saw him last night.
+always,いつも,He is always happy.
+usually,ふつうは,I usually get up early.
+often,よく・しばしば,I often read books.
+sometimes,時々,She sometimes plays the piano.
+never,決して〜ない,I never eat natto.
+here,ここに,Come here.
+there,そこに,He is there.
+now,今,I am studying now.
+then,その時,I was busy then.
+soon,もうすぐ,See you soon.
+early,早く(副),Get up early.
+late,遅く(副),Don't go to bed late.
+fast,速く(副),He swims fast.
+hard,熱心に,Study hard.
+well,上手に,She plays tennis well.
+very,とても,Thank you very much.
+too,〜もまた・〜すぎる,Me too.
+so,だから,So I went home.
+also,〜もまた,He is also a doctor.
+just,ちょうど,Just a moment.
+only,たった〜,I have only one apple.
+even,〜でさえ,Even a child knows that.
+maybe,もしかすると,Maybe he is right.
+yes,はい,"Yes, I am."
+no,いいえ,"No, I am not."
+not,〜でない,He is not a teacher.
+please,お願い,"Help me, please."
+thank,ありがとう,Thank you.
+sorry,ごめんなさい,I am sorry.
+hello,こんにちは,"Hello, Tom."
+hi,やあ,"Hi, Mary."
+goodbye,さようなら,Goodbye!
+bye,さよなら,"Bye, see you."
+welcome,ようこそ,Welcome to my town.
+in,〜の中に,The cat is in the box.
+on,〜の上に,The book is on the desk.
+at,〜に(点・時間),I get up at seven.
+under,〜の下に,The dog is under the table.
+by,〜のそばに・〜によって,I go to school by bus.
+with,〜といっしょに,I play with my friends.
+for,〜のために,This is a present for you.
+to,〜へ,I go to school.
+from,〜から,I am from Japan.
+about,〜について,Tell me about it.
+after,〜の後で,Wash your hands after school.
+before,〜の前で,Wash your hands before dinner.
+of,〜の,"A cup of tea, please."
+off,離れて,Take off your shoes.
+down,下へ,Sit down.
+up,上へ,Stand up.
+and,そして,Tom and I are friends.
+but,しかし,"He is old, but he runs fast."
+or,または,Do you want tea or coffee?
+so,だから,"It rained, so I stayed home."
+because,なぜなら,I was late because it rained.
+if,もし,"If it is sunny, let's play."
+when (接続詞),〜の時,"When I was young, I played baseball."
+that (接続詞),〜ということ,I think that he is right.
+who,だれ,Who is that girl?
+what,なに,What is this?
+when,いつ,When is your birthday?
+where,どこ,Where do you live?
+why,なぜ,Why were you late?
+how,どのように,How are you?
+which,どちら,"Which do you like, apples or oranges?"
+whose,だれの,Whose pen is this?
+I,私,I am a boy.
+my,私の,This is my pen.
+me,私を・私に,Please tell me.
+mine,私のもの,That dictionary is mine.
+you,あなた,You are my friend.
+your,あなたの,Is this your book?
+yours,あなたのもの,This book is yours.
+he,彼,He is a student.
+his,彼の,His father is a doctor.
+him,彼を・彼に,I like him.
+she,彼女,She is a teacher.
+her,彼女の・彼女を,I know her well.
+hers,彼女のもの,This bag is hers.
+it,それ,It is raining.
+its,それの,Its tail is long.
+we,私たち,We are happy.
+our,私たちの,This is our school.
+us,私たちを,Look at us.
+ours,私たちのもの,That house is ours.
+they,彼ら・それら,They are playing baseball.
+their,彼らの,This is their car.
+them,彼らを・彼らに,I help them.
+theirs,彼らのもの,These bikes are theirs.
+this,これ・この,This is my desk.
+these,これら・これらの,These are his shoes.
+that,あれ・あの,That is an old temple.
+those,あれら・あれらの,Those bags are heavy.
